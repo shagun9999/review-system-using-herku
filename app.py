@@ -1,6 +1,7 @@
 import numpy as np
 from flask import Flask, request, jsonify, render_template
-import pickle
+import picklefrom sklearn.feature_extraction.text import CountVectorizer
+ 
 
 
 app = Flask(__name__)
@@ -16,6 +17,7 @@ def predict():
     '''
     For rendering results on HTML GUI
     '''
+    cv = CountVectorizer(max_features = 1500)
     Review = request.args.get('Review')
     input_data = [Review] 
     input_data = cv.transform(input_data).toarray()
